@@ -7,7 +7,7 @@ siny.config(function (localStorageServiceProvider) {
 	.setNotify(true, true)
 });
 
-siny.controller('sinyCtrl', function($scope, $http, localStorageService) {
+siny.controller('sinyCtrl', function($scope, $http, sinyService, localStorageService) {
     var bookMarkName = $scope.bookMarkName;
     var bookMarkUrl = $scope.bookMarkUrl;
     
