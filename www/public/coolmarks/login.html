@@ -1,6 +1,7 @@
 <html>
 <script src="./assets/js/app.js"></script>
 <script src="./assets/js/controller/login_controller.js"></script>
+<script src="./assets/js/service/login_service.js"></script>
 <link rel=stylesheet type=text/css href="./assets/css/style.css">
 <link rel=stylesheet type=text/css href="./assets/css/login.css">
 <link rel="shortcut icon" href="./assets/img/snoopy.ico">
@@ -15,12 +16,12 @@
         </div>
         <div class="col-md-3 column" role="main">
             <div class="login" ng-app="login">
-                <form role="form" method="POST" ng-controller="loginCtrl" ng-submit="submitForm()">
+                <form role="form" method="POST" ng-controller="loginCtrl" ng-submit="userLogin()">
                     <div class="form-group">
-                        <input type="email" class="form-control" name="user.email" placeholder="Email"/>
+                        <input type="email" class="form-control" ng-model="user.email" name="user.email" placeholder="Email"/>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" name="user.password" placeholder="Password"/>
+                        <input type="password" class="form-control" ng-model="user.password" name="user.password" placeholder="Password"/>
                     </div>
                     <button type="submit" class="btn btn-default">
                         Log in

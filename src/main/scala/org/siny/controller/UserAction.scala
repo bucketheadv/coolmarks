@@ -8,7 +8,8 @@ import org.elasticsearch.common.netty.util.CharsetUtil
 import org.siny.web.cache.LoginUserCache
 import org.siny.web.response.HttpResponse
 import org.siny.web.rest.controller.RestAction
-import org.json4s.jackson.JsonMethods._
+import org.json4s._
+import org.json4s.native.JsonMethods._
 import org.siny.web.session.HttpSession
 
 /**
@@ -31,28 +32,20 @@ object UserAction extends RestAction {
   }
 
   def userLogin(httpSession: HttpSession): HttpResponse = {
-    val rawUser = httpSession.httpRequest.getContent.toString(CharsetUtil.UTF_8).split("&")
+    val rawUser = parse(httpSession.httpRequest.getContent.toString(CharsetUtil.UTF_8))
 
-    def validateUser(): HttpResponse = {
-      val email = rawUser(0).split("=")(1)
-      val password = rawUser(1).split("=")(1)
+    val user = User("",
+      Option((rawUser \\ "email").extract[String]),
+      Option((rawUser \\ "password").extract[String])
+    )
 
-      val user = User("", Option(email), Option(password))
-      UserController.validateUserLogin(user) match {
-        case u: User =>
-          LoginUserCache.LOGINED_USER += u.cookie.get -> u
-          HttpResponse(LOGIN_SUCCESSFUL_TIP, OK, Option(u.cookie.get))
-        case null =>
-          HttpResponse(LOGIN_ERROR_TIP, BAD_REQUEST)
-      }
+    UserController.validateUserLogin(user) match {
+      case u: User =>
+        LoginUserCache.LOGINED_USER += u.cookie.get -> u
+        HttpResponse(LOGIN_SUCCESSFUL_TIP, OK, Option(u.cookie.get))
+      case _ =>
+        HttpResponse(LOGIN_ERROR_TIP, BAD_REQUEST)
     }
-
-    val httpResponse = rawUser(0).endsWith("=") || rawUser(1).endsWith("=") match {
-      case true =>
-        HttpResponse(LOGIN_INPUT_TIP, OK)
-      case false => validateUser()
-    }
-    httpResponse
   }
 
   def userInfo(httpSession: HttpSession): HttpResponse = {
