@@ -32,12 +32,7 @@ object UserAction extends RestAction {
   }
 
   def userLogin(httpSession: HttpSession): HttpResponse = {
-    val rawUser = parse(httpSession.httpRequest.getContent.toString(CharsetUtil.UTF_8))
-
-    val user = User("",
-      Option((rawUser \\ "email").extract[String]),
-      Option((rawUser \\ "password").extract[String])
-    )
+    val user = parse(httpSession.httpRequest.getContent.toString(CharsetUtil.UTF_8)).extract[User]
 
     UserController.validateUserLogin(user) match {
       case u: User =>
