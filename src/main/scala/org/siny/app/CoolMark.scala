@@ -1,9 +1,9 @@
 package org.siny.app
 
-import org.siny.web.app.Siny
-
+import org.siny.controller.BookMarkController.{postBookMark, _}
+import org.siny.controller.TabController._
 import org.siny.controller.UserAction.{registerUser, userInfo, userLogin}
-import org.siny.controller.{BookMarkController, TabController}
+import org.siny.web.app.Siny
 import org.siny.web.rest.controller.RestController.registerHandler
 
 /**
@@ -18,12 +18,11 @@ object CoolMark extends Siny {
   override def registerPath(): Unit = {
     registerHandler("POST", "/register.html", registerUser)
     registerHandler("POST", "/login.html", userLogin)
+    registerHandler("POST", "/bookmark", postBookMark)
+    registerHandler("POST", "/tab", postTab)
+
+    registerHandler("GET", "/bookmark", getBookMarks)
     registerHandler("GET", "/user.html", userInfo)
-
-    registerHandler("GET", "/bookmark", BookMarkController.getBookMarks)
-    registerHandler("POST", "/bookmark", BookMarkController.postBookMark)
-    registerHandler("DELETE", "/bookmark", BookMarkController.deleteBookMark)
-
-    registerHandler("POST", "/tab", TabController.postBookMark)
+    registerHandler("DELETE", "/bookmark", deleteBookMark)
   }
 }
