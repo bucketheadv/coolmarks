@@ -14,10 +14,7 @@ import org.siny.web.session.HttpSession
  * Created by chengpohi on 8/16/15.
  */
 object TabController extends RestAction{
-  def postTab(httpSession: HttpSession): HttpResponse = {
-    val rawTab = httpSession.httpRequest.getContent.toString(CharsetUtil.UTF_8)
-
-    val tab = parse(rawTab).extract[Tab]
+  def postTab(httpSession: HttpSession, tab: Tab): HttpResponse = {
     val resultId = createTab(httpSession.user, tab)
     HttpResponse(resultId, OK)
   }

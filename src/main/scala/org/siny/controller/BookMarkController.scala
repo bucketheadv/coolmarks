@@ -3,8 +3,6 @@ package org.siny.controller
 import com.secer.elastic.controller.ElasticController._
 import com.secer.elastic.model.BookMark
 import org.elasticsearch.common.netty.handler.codec.http.HttpResponseStatus.OK
-import org.elasticsearch.common.netty.util.CharsetUtil
-import org.json4s.jackson.JsonMethods._
 import org.siny.web.response.HttpResponse
 import org.siny.web.rest.controller.RestAction
 import org.siny.web.session.HttpSession
@@ -18,10 +16,7 @@ object BookMarkController extends RestAction{
     HttpResponse(getBookMarksWithJson(httpSession.user), OK)
   }
 
-  def postBookMark(httpSession: HttpSession): HttpResponse = {
-    val rawBookMark = httpSession.httpRequest.getContent.toString(CharsetUtil.UTF_8)
-    val bookMark = parse(rawBookMark).extract[BookMark]
-
+  def postBookMark(httpSession: HttpSession, bookMark: BookMark): HttpResponse = {
     createBookMark(httpSession.user, bookMark)
     HttpResponse("Create Success", OK)
   }

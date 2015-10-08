@@ -4,7 +4,7 @@ import org.siny.controller.BookMarkController.{postBookMark, _}
 import org.siny.controller.TabController._
 import org.siny.controller.UserAction.{registerUser, userInfo, userLogin}
 import org.siny.web.app.Siny
-import org.siny.web.rest.controller.RestController.registerHandler
+import org.siny.web.rest.controller.RestController._
 
 /**
  * siny
@@ -16,13 +16,13 @@ object CoolMark extends Siny {
   }
 
   override def registerPath(): Unit = {
-    registerHandler("POST", "/register.html", registerUser)
-    registerHandler("POST", "/login.html", userLogin)
-    registerHandler("POST", "/bookmark", postBookMark)
-    registerHandler("POST", "/tab", postTab)
+    registerHandler(POST, "/register.html", registerUser)
+    registerHandler(POST, "/login.html", userLogin)
+    registerHandlerWithHttpSession(POST, "/bookmark", postBookMark)
+    registerHandlerWithHttpSession(POST, "/tab", postTab)
 
-    registerHandler("GET", "/bookmark", getBookMarks)
-    registerHandler("GET", "/user.html", userInfo)
-    registerHandler("DELETE", "/bookmark", deleteBookMark)
+    registerHandler(GET, "/bookmark", getBookMarks)
+    registerHandler(GET, "/user.html", userInfo)
+    registerHandler(DELETE, "/bookmark", deleteBookMark)
   }
 }
