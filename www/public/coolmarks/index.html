@@ -30,7 +30,7 @@
                         <div ng-if="tab == 'All'">
                             <ul class="bs-glyphicons-list"
                                 ng-repeat="(tab, bookmarks) in user.bookmark | filter:searchBookMark">
-                                <li ng-repeat="bookmark in bookmarks.marks | filter:searchBookMark">
+                                <li ng-repeat="bookmark in bookmarks.marks | orderBy:'-created_at' | filter:searchBookMark">
                                     <div class="markItem">
                                         <i class="glyphicon fa fa-trash fa-2x"
                                            ng-click="removeMarkItem(user, tab, $index)"></i>
@@ -38,6 +38,7 @@
                                             <div class="markBlock">
                                                 <div class="markUrl">
                                                     {{bookmark.url | limitTo: 25}}
+                                                    <p ng-bind="bookmark.created_at | date:'yyyy/MM/dd'"></p>
                                                 </div>
                                                 <hr/>
                                                 <div class="markInfo">
@@ -50,7 +51,7 @@
                             </ul>
                         </div>
                         <ul ng-if="tab != 'All'" class="bs-glyphicons-list">
-                            <li ng-repeat="bookmark in bookmarks.marks | filter:searchBookMark">
+                            <li ng-repeat="bookmark in bookmarks.marks | orderBy:'-created_at' | filter:searchBookMark">
                                 <div class="markItem">
                                     <i class="glyphicon fa fa-trash fa-2x"
                                        ng-click="removeMarkItem(user, tab, $index)"></i>
@@ -58,6 +59,7 @@
                                         <div class="markBlock">
                                             <div class="markUrl">
                                                 {{bookmark.url | limitTo: 25}}
+                                                <p ng-bind="bookmark.created_at | date:'yyyy/MM/dd'"></p>
                                             </div>
                                             <hr/>
                                             <div class="markInfo">
