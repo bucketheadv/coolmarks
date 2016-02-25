@@ -8,7 +8,7 @@ import org.siny.web.rest.controller.RestController._
 
 /**
  * siny
- * Created by chengpohi on 8/16/15.
+ * Created by com.github.chengpohi on 8/16/15.
  */
 object CoolMark extends Siny {
   def main(args: Array[String]): Unit = {

@@ -11,7 +11,7 @@ import org.siny.web.session.HttpSession
 
 /**
  * siny
- * Created by chengpohi on 8/16/15.
+ * Created by com.github.chengpohi on 8/16/15.
  */
 object TabController extends RestAction{
   def postTab(httpSession: HttpSession, tab: Tab): HttpResponse = {

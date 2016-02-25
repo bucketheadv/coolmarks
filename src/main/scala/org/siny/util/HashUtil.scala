@@ -2,7 +2,7 @@ package org.siny.util
 
 /**
  * HashUtil
- * Created by chengpohi on 7/2/15.
+ * Created by com.github.chengpohi on 7/2/15.
  */
 object HashUtil {
   def hashUserPassword(password: String): String = {

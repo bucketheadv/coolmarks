@@ -11,7 +11,7 @@ import org.siny.web.session.HttpSession
 
 /**
  * User Controller
- * Created by chengpohi on 8/1/15.
+ * Created by com.github.chengpohi on 8/1/15.
  */
 
 object UserAction extends RestAction {
