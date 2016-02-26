@@ -20,7 +20,7 @@ import scala.concurrent.{Await, Future}
  * Created by com.github.chengpohi on 6/28/15.
  */
 class ElasticBase {
-  lazy val client = ElasticClientConnector.client
+  val client = ElasticClientConnector.client
 
   val BOOKMARK_TYPE: String = "bookmark"
   val TAB_TYPE: String = "tab"
