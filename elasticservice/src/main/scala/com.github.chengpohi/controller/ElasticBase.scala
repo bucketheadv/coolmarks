@@ -58,11 +58,6 @@ class ElasticBase {
           )
         )
     }.await
-
-    val tab: Tab = Tab(Option(""), "All")
-    client.execute {
-      index into indexName / TAB_TYPE doc tab id 1
-    }.await
   }
 
   def createIndex(indexName: String) = client.execute {

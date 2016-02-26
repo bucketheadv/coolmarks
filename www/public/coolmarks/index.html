@@ -16,42 +16,43 @@
             <input ng-model="searchBookMark" type="text" class="form-control"> </input>
             <div class="marks">
                 <ul class="tabs nav nav-tabs">
-                    <li ng-repeat="(tab, bookmarks) in user.bookmark" ng-class=
-                            "{'active': tab === 'All' }">
+                    <li ng-repeat="(tab, bookmarks) in user.bookmark"
+                        ng-class="{'active': tab === 'Scala' }">
                         <a href="#{{ bookmarks.id }}" data-toggle="tab">
                             {{ tab }}
                         </a>
                     </li>
                 </ul>
                 <div id="tabContent" class="tab-content">
-                    <div ng-repeat="(tab, bookmarks) in user.bookmark | filter:searchBookMark"
-                         class="tab-pane fade in" id="{{ bookmarks.id }}" ng-class=
-                                 "{'active': tab === 'All' }">
-                        <div ng-if="tab == 'All'">
-                            <ul class="bs-glyphicons-list"
-                                ng-repeat="(tab, bookmarks) in user.bookmark | filter:searchBookMark">
-                                <li ng-repeat="bookmark in bookmarks.marks | orderBy:'-created_at' | filter:searchBookMark">
-                                    <div class="markItem">
-                                        <i class="glyphicon fa fa-trash fa-2x"
-                                           ng-click="removeMarkItem(user, tab, $index)"></i>
-                                        <a href="{{bookmark.url}}" target="_blank">
-                                            <div class="markBlock">
-                                                <div class="markUrl">
-                                                    {{bookmark.url | limitTo: 25}}
-                                                    <p ng-bind="bookmark.created_at | date:'yyyy/MM/dd'"></p>
-                                                </div>
-                                                <hr/>
-                                                <div class="markInfo">
-                                                    {{bookmark.name | limitTo: 20}}
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <ul ng-if="tab != 'All'" class="bs-glyphicons-list">
+                    <div ng-show="searchBookMark">
+                        <ul class="bs-glyphicons-list"
+                            ng-repeat="(tab, bookmarks) in user.bookmark | filter:searchBookMark">
                             <li ng-repeat="bookmark in bookmarks.marks | orderBy:'-created_at' | filter:searchBookMark">
+                                <div class="markItem">
+                                    <i class="glyphicon fa fa-trash fa-2x"
+                                       ng-click="removeMarkItem(user, tab, $index)"></i>
+                                    <a href="{{bookmark.url}}" target="_blank">
+                                        <div class="markBlock">
+                                            <div class="markUrl">
+                                                {{bookmark.url | limitTo: 25}}
+                                                <p ng-bind="bookmark.created_at | date:'yyyy/MM/dd'"></p>
+                                            </div>
+                                            <hr/>
+                                            <div class="markInfo">
+                                                {{bookmark.name | limitTo: 20}}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div ng-repeat="(tab, bookmarks) in user.bookmark"
+                         class="tab-pane fade in" id="{{ bookmarks.id }}"
+                         ng-show="!searchBookMark"
+                         ng-class="{'active': tab === 'Scala' }">
+                        <ul class="bs-glyphicons-list">
+                            <li ng-repeat="bookmark in bookmarks.marks | orderBy:'-created_at'">
                                 <div class="markItem">
                                     <i class="glyphicon fa fa-trash fa-2x"
                                        ng-click="removeMarkItem(user, tab, $index)"></i>

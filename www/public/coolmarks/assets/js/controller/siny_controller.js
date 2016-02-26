@@ -7,17 +7,18 @@ siny.config(function (localStorageServiceProvider) {
 	.setNotify(true, true)
 });
 
-siny.controller('sinyCtrl', function($scope, $http, sinyService, localStorageService) {
+siny.controller('sinyCtrl', function($scope, $http, $window, sinyService, localStorageService) {
     var bookMarkName = $scope.bookMarkName;
     var bookMarkUrl = $scope.bookMarkUrl;
     
     $scope.user = { bookmark: [] };
 
     $http.get("/bookmark").success(function(data, status, headers, config) {
-		$scope.user.bookmark = data
+		$scope.user.bookmark = data;
 		localStorageService.set("chengpohi", $scope.user);
 	}).error(function(data, status, headers, config) {
-		$scope.user = getItem("chengpohi")
+		$scope.user = getItem("chengpohi");
+		$window.location.href = '/login.html';
     });
 
     $scope.append = function (user, bookMarkName, bookMarkUrl, bookMarkTab) {
@@ -47,27 +48,29 @@ siny.controller('sinyCtrl', function($scope, $http, sinyService, localStorageSer
     }
 
     function postTab(tabName, user) {
-		$http.post('/tab', {'name': tabName}).
-		    success(function(data, status, headers, config) {
+		$http.post('/tab', {'name': tabName}).success(function(data, status, headers, config) {
 			user.bookmark[tabName] = {"marks": [], "id": data};
-		})
-		.error(function(data, status, headers, config) {
+			alert("Add " + tabName + " Success");
+		}).error(function(data, status, headers, config) {
+			alert(data);
 		});
     }
 
     function postBookMark(bookMarkName, bookMarkUrl, bookMarkTabId) {
-		$http.post('/bookmark', {'name': bookMarkName, 'url': bookMarkUrl, 'tabId': bookMarkTabId}).
-		    success(function(data, status, headers, config) {
+		$http.post('/bookmark', {'name': bookMarkName, 'url': bookMarkUrl, 'tabId': bookMarkTabId}).success(function(data, status, headers, config) {
+		    alert("create " + bookMarkName + " success");
 		})
 		.error(function(data, status, headers, config) {
+			alert(data);
 		});
     }
     
     function deleteBookMark(bookMarkId) {
-		$http.delete('/bookmark/' + bookMarkId).
-		    success(function(data, status, headers, config) {
+		$http.delete('/bookmark/' + bookMarkId).success(function(data, status, headers, config) {
+		    alert("delete success");
 		})
 		.error(function(data, status, headers, config) {
+			alert(data);
 		});
 	}
 });

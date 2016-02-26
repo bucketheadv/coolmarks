@@ -23,11 +23,15 @@ class RestServerHandler extends SimpleChannelUpstreamHandler {
   lazy val LOG = LoggerFactory.getLogger(getClass.getName)
   implicit val formats = DefaultFormats
 
+  def uriMatchRule(rule: String, uri: String): Boolean = {
+    val ruleRegex = rule.replaceAll("\\{\\w+\\}", ".*").r
+    ruleRegex.pattern.matcher(uri).matches()
+  }
+
   override def messageReceived(ctx: ChannelHandlerContext, e: MessageEvent) = {
     val httpRequest = e.getMessage.asInstanceOf[HttpRequest]
 
     val user = visitHandler(ctx, httpRequest)
-
 
     val uri: String = httpRequest.getUri
 
@@ -36,8 +40,9 @@ class RestServerHandler extends SimpleChannelUpstreamHandler {
       case GET => getActions.getOrElse(uri, null)
       case POST => postActions.getOrElse(uri, null)
       case PUT => putActions.getOrElse(uri, null)
-      case DELETE => deleteActions.getOrElse(uri, null)
+      case DELETE => deleteActions.filter(i => uriMatchRule(i._1, uri)).values.head
     }
+
 
     val httpSession = HttpSession(user, httpRequest)
 

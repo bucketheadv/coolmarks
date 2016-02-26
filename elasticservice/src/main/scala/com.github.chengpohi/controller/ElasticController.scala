@@ -80,6 +80,12 @@ object ElasticController extends ElasticBase {
     }
   }
 
+  def deleteTabById(_id: String, user: User): Unit = {
+    client execute {
+      delete id _id from user.name + "/" + TAB_TYPE
+    }
+  }
+
   def deleteIndexByIndexName(indexName: String): Unit = {
     client.execute {
       delete index indexName

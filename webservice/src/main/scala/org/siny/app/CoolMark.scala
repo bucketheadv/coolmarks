@@ -23,6 +23,7 @@ object CoolMark extends Siny {
 
     registerHandler(GET, "/bookmark", getBookMarks)
     registerHandler(GET, "/user.html", userInfo)
-    registerHandler(DELETE, "/bookmark", deleteBookMark)
+    registerHandler(DELETE, "/bookmark/{bookmarkID}", deleteBookMark)
+    registerHandler(DELETE, "/tab/{tabID}", deleteTab)
   }
 }
