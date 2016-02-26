@@ -35,15 +35,40 @@ val elasticServiceDependencies = Seq(
 lazy val elasticservice = project.in(file("elasticservice"))
   .settings(commonSettings: _*)
   .settings(libraryDependencies ++= elasticServiceDependencies ++ commonDependencies)
+  .settings(
+    assemblyMergeStrategy in assembly := {
+      case "application.conf" => MergeStrategy.discard
+      case x =>
+        val oldStrategy = (assemblyMergeStrategy in assembly).value
+        oldStrategy(x)
+    }
+  )
 
 lazy val siny = project.in(file("siny"))
   .settings(commonSettings: _*)
   .settings(libraryDependencies ++= commonDependencies)
+  .settings(
+    assemblyMergeStrategy in assembly := {
+      case "application.conf" => MergeStrategy.discard
+      case x =>
+        val oldStrategy = (assemblyMergeStrategy in assembly).value
+        oldStrategy(x)
+    }
+  )
   .aggregate(elasticservice)
   .dependsOn(elasticservice)
 
 lazy val root = (project in file("webservice"))
   .settings(commonSettings: _*)
+  .settings(
+    assemblyJarName in assembly := "webservice.jar",
+    assemblyMergeStrategy in assembly := {
+      case "application.conf" => MergeStrategy.discard
+      case x =>
+        val oldStrategy = (assemblyMergeStrategy in assembly).value
+        oldStrategy(x)
+    }
+  )
   .aggregate(siny)
   .dependsOn(siny)
 

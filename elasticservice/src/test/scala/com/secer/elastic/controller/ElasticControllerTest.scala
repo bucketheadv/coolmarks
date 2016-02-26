@@ -11,16 +11,7 @@ import org.scalatest.FlatSpec
 class ElasticControllerTest extends FlatSpec {
   val user = User("pipi" + System.currentTimeMillis(), Option("test123"))
   val tab = Tab(Option(""), "tino")
-  val bookMark = BookMark(Option(""), "jack", "http://www.baidu.com")
-
-  "ElasticController " should " index user data" in {
-    //ElasticController.create(null)
-    ElasticController.getBookMarksWithJson(user) match {
-      case null => ElasticController.createBookMark(user, bookMark)
-      case s: String if s == "{}" => ElasticController.createBookMark(user, bookMark)
-      case _ => println("USER HAVE EXISTED NOT NEED CREATE.")
-    }
-  }
+  val bookMark = BookMark(Option(""), "jack", "http://www.baidu.com", Some("somemd5asdfasdf"))
 
   "ElasticController " should " create user tab" in {
     val resultId = ElasticController.createTab(user, tab)
@@ -37,12 +28,6 @@ class ElasticControllerTest extends FlatSpec {
   "ElasticController" should "get all user tabs" in {
     ElasticController.getTabsWithObject(user).map(s => println(s.getSource))
     assert(ElasticController.getTabsWithObject(user) != null)
-  }
-
-  "ElasticController" should "update bookMark by id" in {
-    Thread.sleep(1000)
-    val id = ElasticController.getBookMarksWithUser(user)(0).getId
-    ElasticController.updateBookMarkById(user, BookMark(Option(id), "rose", "http://www.google.com"))
   }
 
   "ElasticController" should "add field name" in {
