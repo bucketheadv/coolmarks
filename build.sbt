@@ -42,7 +42,7 @@ lazy val siny = project.in(file("siny"))
   .aggregate(elasticservice)
   .dependsOn(elasticservice)
 
-lazy val root = (project in file("."))
+lazy val root = (project in file("webservice"))
   .settings(commonSettings: _*)
   .aggregate(siny)
   .dependsOn(siny)

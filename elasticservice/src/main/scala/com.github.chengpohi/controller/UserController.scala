@@ -1,7 +1,6 @@
 package com.github.chengpohi.controller
 
 import com.github.chengpohi.model.User
-import com.github.chengpohi.util.HashUtil
 import com.github.chengpohi.util.HashUtil.md5Hash
 import com.sksamuel.elastic4s.ElasticDsl._
 
