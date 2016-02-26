@@ -88,6 +88,7 @@ class RestServerHandler extends SimpleChannelUpstreamHandler {
   }
 
   def visitHandler(ctx: ChannelHandlerContext, httpRequest: HttpRequest): User = {
+    if (httpRequest.headers().get(HttpHeaders.Names.COOKIE) == null) return null
     val user = for {
       c <- httpRequest.headers().get(HttpHeaders.Names.COOKIE).split(";")
       if c.trim.matches("cookieID=.+")
