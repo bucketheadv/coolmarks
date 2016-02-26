@@ -1,14 +1,13 @@
-package com.secer.elastic.controller
+package com.github.chengpohi.controller
 
-import com.secer.elastic.model.{BookMark, Tab, User}
+import com.github.chengpohi.model._
 import com.sksamuel.elastic4s.ElasticDsl._
 import org.elasticsearch.search.SearchHit
-import org.elasticsearch.search.sort.SortOrder.ASC
 import org.elasticsearch.transport.RemoteTransportException
 import org.slf4j.LoggerFactory
 
-import scala.language.implicitConversions
 import scala.collection.JavaConverters._
+import scala.language.implicitConversions
 import scala.util.parsing.json.JSONObject
 
 /**

@@ -1,7 +1,7 @@
-package com.secer.elastic.controller
+package com.github.chengpohi.controller
 
-import com.secer.elastic.model.{FetchItem, Page}
-import com.secer.elastic.util.HashUtil
+import com.github.chengpohi.model._
+import com.github.chengpohi.util.HashUtil
 import com.sksamuel.elastic4s.ElasticDsl._
 import com.sksamuel.elastic4s.SimpleAnalyzer
 import com.sksamuel.elastic4s.mappings.FieldType.{DateType, StringType}
@@ -32,7 +32,7 @@ object PageController extends ElasticBase {
   def pageWhetherExist(fetchItem: FetchItem): Boolean = {
     try {
       val response: GetResponse =
-        getDocById(fetchItem.indexName, fetchItem.indexType, HashUtil.hashString(fetchItem.url.toString))
+        getDocById(fetchItem.indexName, fetchItem.indexType, HashUtil.md5Hash(fetchItem.url.toString))
       response.isExists
     } catch {
       case e: RemoteTransportException => false

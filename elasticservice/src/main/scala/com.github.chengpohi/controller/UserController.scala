@@ -1,7 +1,8 @@
-package com.secer.elastic.controller
+package com.github.chengpohi.controller
 
-import com.secer.elastic.model.User
-import com.secer.elastic.util.HashUtil.hashString
+import com.github.chengpohi.model.User
+import com.github.chengpohi.util.HashUtil
+import com.github.chengpohi.util.HashUtil.md5Hash
 import com.sksamuel.elastic4s.ElasticDsl._
 
 /**
@@ -24,7 +25,7 @@ object UserController extends ElasticBase {
         bool {
           must {
             termQuery(EMAIL_TYPE, user.email.get)
-            termQuery(PASSWORD_TYPE, hashString(user.password.get))
+            termQuery(PASSWORD_TYPE, md5Hash(user.password.get))
           }
         }
       }
@@ -35,7 +36,7 @@ object UserController extends ElasticBase {
         val hit = resp.getHits.hits()(0).getSource
         val username = hit.get("name").toString
         val email: Some[String] = Some(hit.get(EMAIL_TYPE).toString)
-        User(username, email, Some(""), Some(hashString(email.get)))
+        User(username, email, Some(""), Some(md5Hash(email.get)))
       case _ => null
     }
   }

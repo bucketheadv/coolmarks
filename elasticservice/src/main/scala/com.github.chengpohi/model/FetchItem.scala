@@ -1,4 +1,4 @@
-package com.secer.elastic.model
+package com.github.chengpohi.model
 
 import java.net.URL
 

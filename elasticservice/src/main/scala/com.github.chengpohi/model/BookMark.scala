@@ -1,4 +1,4 @@
-package com.secer.elastic.model
+package com.github.chengpohi.model
 
 import com.sksamuel.elastic4s.source.DocumentMap
 

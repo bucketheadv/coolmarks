@@ -1,6 +1,6 @@
-package com.secer.elastic.search
+package com.github.chengpohi.search
 
-import com.secer.elastic.ElasticClientConnector
+import com.github.chengpohi.ElasticClientConnector
 import com.sksamuel.elastic4s.ElasticDsl._
 import org.elasticsearch.action.search.SearchResponse
 import org.elasticsearch.search.SearchHit

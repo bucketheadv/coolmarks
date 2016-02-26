@@ -1,4 +1,4 @@
-package com.secer.elastic
+package com.github.chengpohi
 
 import com.sksamuel.elastic4s.ElasticClient
 
