@@ -1,6 +1,6 @@
 package org.siny.web.handler
 
-import com.secer.elastic.model.User
+import com.github.chengpohi.model.User
 import org.elasticsearch.common.netty.channel._
 import org.elasticsearch.common.netty.handler.codec.http.HttpMethod.{DELETE, GET, POST, PUT}
 import org.elasticsearch.common.netty.handler.codec.http.HttpResponseStatus.BAD_REQUEST

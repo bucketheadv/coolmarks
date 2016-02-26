@@ -1,7 +1,8 @@
 package com.secer.elastic.controller
 
-import com.secer.elastic.model.User
-import com.secer.elastic.util.HashUtil.hashString
+import com.github.chengpohi.controller.{UserController, ElasticController}
+import com.github.chengpohi.model.User
+import com.github.chengpohi.util.HashUtil
 import org.scalatest.FlatSpec
 
 /**
@@ -25,7 +26,7 @@ class UserControllerTest extends FlatSpec {
     Thread.sleep(1000)
     val responseUser = UserController.validateUserLogin(userWithCorrectPassword)
     assert(responseUser.name == "com.github.chengpohi")
-    assert(responseUser.cookie.get == hashString(userWithCorrectPassword.email.get))
+    assert(responseUser.cookie.get == HashUtil.md5Hash(userWithCorrectPassword.email.get))
     assert(responseUser.email.get == userWithCorrectPassword.email.get)
 
   }

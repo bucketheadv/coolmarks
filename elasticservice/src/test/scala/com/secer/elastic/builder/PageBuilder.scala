@@ -2,8 +2,9 @@ package com.secer.elastic.builder
 
 import java.net.URL
 
-import com.secer.elastic.model.{IndexField, FieldSelector, FetchItem, Page}
-import com.secer.elastic.util.HashUtil
+import com.github.chengpohi.model.{Page, IndexField, FetchItem, FieldSelector}
+import com.github.chengpohi.util.HashUtil
+
 
 /**
  * BookMark model
@@ -19,5 +20,5 @@ object PageBuilder {
   val indexFields = List(indexField1, indexField2)
 
 
-  def build(): Page = Page(null, fetchItems, "1ad33512e77b98807ecde5e5dbd3cb7c", HashUtil.hashString(fetchItems.url.toString), indexFields)
+  def build(): Page = Page(null, fetchItems, "1ad33512e77b98807ecde5e5dbd3cb7c", HashUtil.md5Hash(fetchItems.url.toString), indexFields)
 }

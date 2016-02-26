@@ -1,5 +1,6 @@
 package com.secer.elastic.controller
 
+import com.github.chengpohi.controller.PageController
 import com.secer.elastic.builder.PageBuilder
 import org.scalatest.{BeforeAndAfter, FlatSpec}
 

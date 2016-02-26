@@ -1,7 +1,7 @@
 package org.siny.controller
 
-import com.secer.elastic.controller.ElasticController._
-import com.secer.elastic.model.BookMark
+import com.github.chengpohi.controller.ElasticController._
+import com.github.chengpohi.model.BookMark
 import org.elasticsearch.common.netty.handler.codec.http.HttpResponseStatus.OK
 import org.siny.web.response.HttpResponse
 import org.siny.web.rest.controller.RestAction

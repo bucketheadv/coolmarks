@@ -1,6 +1,6 @@
 package org.siny.web.cache
 
-import com.secer.elastic.model.User
+import com.github.chengpohi.model.User
 
 import scala.collection._
 import scala.collection.convert.decorateAsScala._

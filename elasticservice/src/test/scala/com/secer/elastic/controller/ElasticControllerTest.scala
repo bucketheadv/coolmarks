@@ -1,6 +1,7 @@
 package com.secer.elastic.controller
 
-import com.secer.elastic.model._
+import com.github.chengpohi.controller.ElasticController
+import com.github.chengpohi.model._
 import org.scalatest.FlatSpec
 
 /**

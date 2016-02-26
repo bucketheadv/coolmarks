@@ -1,6 +1,6 @@
 package org.siny.web.rest.controller
 
-import com.secer.elastic.model.User
+import com.github.chengpohi.model.User
 import org.elasticsearch.common.netty.handler.codec.http.HttpResponseStatus
 import org.scalatest.FlatSpec
 import org.siny.web.response.HttpResponse

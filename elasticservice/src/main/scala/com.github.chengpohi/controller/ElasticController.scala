@@ -25,11 +25,13 @@ object ElasticController extends ElasticBase {
   def getBookMarksWithJson(user: User): String = {
     val result = for (hit <- getTabsWithObject(user)) yield {
       try {
+        val tabId = hit.getSource.getOrDefault("_tab_id", "").asInstanceOf[String]
         val resp = client.execute {
           search in user.name / BOOKMARK_TYPE query filteredQuery postFilter
-            termFilter("_tab_id", hit.getSource.getOrDefault("_tab_id", "")) start 0 limit Integer.MAX_VALUE
+            termFilter("_tab_id", tabId) start 0 limit Integer.MAX_VALUE
         }.await
-        "\"" + hit.getSource.get("name") + "\" : { \"marks\": " + searchHitsToJSONString(resp.getHits.getHits) + ", \"id\": \"" + hit.getId + "\"}"
+        "\"" + hit.getSource.get("name") + "\" : { \"marks\": " + searchHitsToJSONString(resp.getHits.getHits) +
+          ", \"id\": \"" + tabId + "\"}"
       } catch {
         case ime: RemoteTransportException => {
           ime.printStackTrace()

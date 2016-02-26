@@ -1,6 +1,6 @@
 package org.siny.web.session
 
-import com.secer.elastic.model.User
+import com.github.chengpohi.model.User
 import org.elasticsearch.common.netty.handler.codec.http.HttpRequest
 
 /**

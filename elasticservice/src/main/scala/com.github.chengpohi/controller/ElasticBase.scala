@@ -1,7 +1,7 @@
 package com.github.chengpohi.controller
 
 import com.github.chengpohi.ElasticClientConnector
-import com.github.chengpohi.model.Field
+import com.github.chengpohi.model.{Tab, Field}
 import com.sksamuel.elastic4s.ElasticDsl._
 import com.sksamuel.elastic4s.SearchType.Scan
 import com.sksamuel.elastic4s.mappings.FieldType.{DateType, StringType}

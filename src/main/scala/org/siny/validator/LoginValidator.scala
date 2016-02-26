@@ -1,6 +1,7 @@
 package org.siny.validator
 
-import com.secer.elastic.model.User
+import com.github.chengpohi.model.User
+
 
 /**
  * BookMark model

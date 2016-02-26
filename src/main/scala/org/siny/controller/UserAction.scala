@@ -1,7 +1,7 @@
 package org.siny.controller
 
-import com.secer.elastic.controller.UserController
-import com.secer.elastic.model.User
+import com.github.chengpohi.controller.UserController
+import com.github.chengpohi.model.User
 import org.elasticsearch.common.netty.handler.codec.http.HttpResponseStatus
 import org.elasticsearch.common.netty.handler.codec.http.HttpResponseStatus.{BAD_REQUEST, OK}
 import org.siny.web.cache.LoginUserCache
