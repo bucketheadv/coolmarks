@@ -16,7 +16,5 @@ object ElasticClientConnector {
   val host: String = indexConfig.getString("host")
   val port: Int = indexConfig.getInt("port")
   val uri = ElasticsearchClientUri(s"elasticsearch://$host:$port")
-
   val client = ElasticClient.remote(settings, uri)
-
 }
