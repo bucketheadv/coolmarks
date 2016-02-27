@@ -15,6 +15,7 @@ siny.controller('sinyCtrl', function($scope, $http, $window, sinyService, localS
 
     $http.get("/bookmark").success(function(data, status, headers, config) {
 		$scope.user.bookmark = data;
+		$scope.user.bookmark["My Indeed"] = { "id": "tracemarker_indeed_id"};
 		localStorageService.set("chengpohi", $scope.user);
 	}).error(function(data, status, headers, config) {
 		$scope.user = getItem("chengpohi");
