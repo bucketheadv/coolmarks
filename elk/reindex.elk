@@ -1,7 +1,14 @@
-mapping "chengpohi-tmp" {"mappings":{"bookmark":{"properties":{"created_at":{"type":"date"},"name":{"type":"string","analyzer":"standard","copy_to":"name.tags"},"name.tags":{"type":"string","analyzer":"stop_analyzer"},"_tab_id":{"type":"string","index":"not_analyzed"}}},"tab":{"properties":{"created_at":{"type":"date"},"_tab_id":{"type":"string","index":"not_analyzed"}}}},"settings":{"analysis":{"analyzer":{"stop_analyzer":{"type":"standard","stopwords_path":"stopwords/coder.txt"}}}}}
+mapping "chengpohi-tmp" {"mappings":{"bookmark":{"properties":{"created_at":{"type":"date"},"name":{"type":"string","copy_to":"name_tags"},"name_tags":{"type":"string","analyzer":"stop_analyzer"},"_tab_id":{"type":"string","index":"not_analyzed"}}},"tab":{"properties":{"created_at":{"type":"date"}, "name": {"type": "string"},"_tab_id":{"type":"string","index":"not_analyzed"}}}},"settings":{"analysis":{"analyzer":{"stop_analyzer":{"type":"standard","stopwords_path":"stopwords/coder.txt"}}}}}
+
 
 reindex "chengpohi" "chengpohi-tmp" "bookmark" ["name", "url", "created_at", "_tab_id"]
 reindex "chengpohi" "chengpohi-tmp" "tab" ["name", "created_at", "_tab_id"]
 
+delete "chengpohi"
+
+mapping "chengpohi" {"mappings":{"bookmark":{"properties":{"created_at":{"type":"date"},"name":{"type":"string","copy_to":"name_tags"},"name_tags":{"type":"string","analyzer":"stop_analyzer"},"_tab_id":{"type":"string","index":"not_analyzed"}}},"tab":{"properties":{"created_at":{"type":"date"}, "name": {"type": "string"},"_tab_id":{"type":"string","index":"not_analyzed"}}}},"settings":{"analysis":{"analyzer":{"stop_analyzer":{"type":"standard","stopwords_path":"stopwords/coder.txt"}}}}}
+
 reindex "chengpohi-tmp" "chengpohi" "bookmark" ["name", "url", "created_at", "_tab_id"]
 reindex "chengpohi-tmp" "chengpohi" "tab" ["name", "created_at", "_tab_id"]
+
+delete "chengpohi-tmp"
