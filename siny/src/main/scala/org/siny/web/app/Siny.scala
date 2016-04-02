@@ -3,7 +3,6 @@ package org.siny.web.app
 import java.net.InetSocketAddress
 import java.util.concurrent.Executors
 
-import com.github.chengpohi.controller.ElasticController
 import com.typesafe.config.ConfigFactory
 import org.elasticsearch.common.netty.bootstrap.ServerBootstrap
 import org.elasticsearch.common.netty.channel.socket.nio.NioServerSocketChannelFactory
