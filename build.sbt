@@ -71,5 +71,3 @@ lazy val root = (project in file("webservice"))
   )
   .aggregate(siny)
   .dependsOn(siny)
-
-project root
