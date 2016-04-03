@@ -22,6 +22,6 @@ www/public/js/app.js
 *~
 www/public/.sass-cache/
 project/target/*
+project/project/*
 lib/*
-project/*
 *.iml
