@@ -25,3 +25,4 @@ project/target/*
 project/project/*
 lib/*
 *.iml
+elkdata/*
