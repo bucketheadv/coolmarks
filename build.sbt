@@ -58,7 +58,7 @@ lazy val siny = project.in(file("siny"))
   .aggregate(elasticservice)
   .dependsOn(elasticservice)
 
-lazy val root = (project in file("webservice"))
+lazy val root = (project in file("."))
   .settings(commonSettings: _*)
   .settings(
     assemblyJarName in assembly := "webservice.jar",
