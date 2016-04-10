@@ -2,10 +2,10 @@ var loginForm = angular.module('login', ["ngRoute"]);
 
 loginForm.config(["$routeProvider",function($routeProvider){
   $routeProvider.when("/regist.html", {
-    templateUrl: "/regist_form.html",
+    templateUrl: "views/regist_form.html",
     controller: 'loginCtrl'
   }).otherwise({
-    templateUrl: "/login_form.html",
+    templateUrl: "views/login_form.html",
     controller: 'loginCtrl'
   });
 }]);

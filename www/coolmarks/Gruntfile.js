@@ -2,7 +2,7 @@ module.exports = function(grunt) {
     grunt.initConfig({
 	pkg: grunt.file.readJSON('package.json'),
 	project: {
-            app: ['coolmarks'],
+            app: ['app'],
             assets: ['<%= project.app %>/assets'],
             css: ['<%= project.assets %>/sass/style.scss']
 	},
@@ -29,7 +29,7 @@ module.exports = function(grunt) {
             },
             dist: {
 		src: ['bower_components/angular/angular.js', 'bower_components/jquery/dist/jquery.js ', 'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.min.js', "bower_components/angular-local-storage/dist/angular-local-storage.js", "bower_components/angular-route/angular-route.js"],
-		dest: '<%= project.assets %>/js/app.js',
+		dest: '<%= project.app %>/js/app.js',
             },
 	},
     });
