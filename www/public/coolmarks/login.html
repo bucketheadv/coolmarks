@@ -16,17 +16,11 @@
     </div>
     <div class="col-md-3 column" role="main">
       <div class="login" ng-app="login">
-        <form role="form" method="POST" ng-controller="loginCtrl" ng-submit="userLogin()">
-          <div class="form-group">
-            <input type="email" class="form-control" ng-model="user.email" name="user.email" placeholder="Email"/>
-          </div>
-          <div class="form-group">
-            <input type="password" class="form-control" ng-model="user.password" name="user.password" placeholder="Password"/>
-          </div>
-          <button type="submit" class="btn btn-default">
-            Log in
-          </button>
-        </form>
+        <div ng-view></div>
+        <div>
+          <a href="#/regist.html">Regist</a>
+          <a href="#/login.html">Login</a>
+        </div>
       </div>
     </div>
     <div class="col-md-3">

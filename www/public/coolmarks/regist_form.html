@@ -1,0 +1,17 @@
+<form role="form" method="POST" ng-controller="loginCtrl" ng-submit="userRegist()">
+  <div class="form-group">
+    <input type="text" class="form-control" ng-model="user.name" name="user.name" placeholder="Username"/>
+  </div>
+  <div class="form-group">
+    <input type="email" class="form-control" ng-model="user.email" name="user.email" placeholder="Email"/>
+  </div>
+  <div class="form-group">
+    <input type="password" class="form-control" ng-model="user.password" name="user.password" placeholder="Password"/>
+  </div>
+  <div class="form-group">
+    <input type="password" class="form-control" ng-model="user.password_confirm" name="user.password_confirm" placeholder="Password Confirmation"/>
+  </div>
+  <button type="submit" class="btn btn-default">
+    Regist
+  </button>
+</form>
