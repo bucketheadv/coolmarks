@@ -16,11 +16,11 @@ project/plugins/project/
 .scala_dependencies
 .worksheet
 .idea/*
-www/public/bower_components
-www/public/node_modules
-www/public/js/app.js
+www/coolmarks/bower_components
+www/coolmarks/node_modules
+www/coolmarks/js/app.js
 *~
-www/public/.sass-cache/
+www/coolmarks/.sass-cache/
 project/target/*
 project/project/*
 lib/*
