@@ -26,3 +26,4 @@ project/project/*
 lib/*
 *.iml
 elkdata/*
+*.swp

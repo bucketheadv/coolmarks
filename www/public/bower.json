@@ -12,6 +12,7 @@
 	"angular": "",
 	"bootstrap-sass-official": "",
 	"jquery": "",
+  "angular-route": "",
 	"angular-local-storage": ""
     },
     "ignore": [
