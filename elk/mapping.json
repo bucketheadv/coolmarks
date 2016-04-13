@@ -1,4 +1,4 @@
-//mapping "chengpohi-tmp"
+//mapping "chengpohi-tmp" {"mappings":{"bookmark":{"properties":{"created_at":{"type":"date"},"name":{"type":"string","copy_to":"name_tags"},"name_tags":{"type":"string","analyzer":"tag_analyzer"},"_tab_id":{"type":"string","index":"not_analyzed"},"url":{"type":"string","analyzer":"not_analyzed"}}},"tab":{"properties":{"created_at":{"type":"date"},"name":{"type":"string"},"_tab_id":{"type":"string","index":"not_analyzed"}}}},"settings":{"analysis":{"analyzer":{"tag_analyzer":{"type":"standard","tokenizer":"standard","filter":["standard","tags_filter"],"stopwords_path":"stopwords/stop_words.txt"}},"filter":{"tags_filter":{"type":"keep","keep_words_path":"tags.csv"}}}}}
 {
   "mappings": {
     "bookmark": {

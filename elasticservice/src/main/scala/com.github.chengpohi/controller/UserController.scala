@@ -1,42 +1,44 @@
 package com.github.chengpohi.controller
 
 import com.github.chengpohi.model.User
-import com.github.chengpohi.util.HashUtil.md5Hash
-import com.sksamuel.elastic4s.ElasticDsl._
+import com.github.chengpohi.util.ElasticUtil
+import com.github.chengpohi.util.ElasticUtil.{documentMapToJson, md5Hash}
+import org.json4s._
+import org.json4s.native.JsonMethods._
 
 /**
- * BookMark model
- * Created by com.github.chengpohi on 7/29/15.
- */
-object UserController extends ElasticBase {
+  * BookMark model
+  * Created by com.github.chengpohi on 7/29/15.
+  */
+object UserController extends DAOBase {
+  implicit val formats = DefaultFormats
+
   val EMAIL_TYPE: String = "email"
   val PASSWORD_TYPE: String = "password"
   val ALL_TYPE: String = "_all"
 
   def createUserInfo(user: User): String = {
     createUserMapping(user.name)
-    indexMapById(user.name, INFO_TYPE, "1", user).getId
+    indexMapById(user.name, INFO_TYPE, "1", user)
+  }
+
+  def createUserMapping(indexName: String): String = {
+    elkRunEngine.run(MAPPINGS, indexName)
   }
 
   def validateUserLogin(user: User): User = {
-    val resp = client.execute {
-      search in ALL_TYPE / INFO_TYPE query {
-        bool {
-          must {
-            termQuery(EMAIL_TYPE, user.email.get)
-            termQuery(PASSWORD_TYPE, md5Hash(user.password.get))
-          }
-        }
-      }
-    }.await
+    val resp = elkRunEngine.run(TERM_QUERY, ALL_TYPE, INFO_TYPE, ElasticUtil.userLoginJson(user))
+    userRetrieve(resp)
+  }
 
-    resp.getHits.hits().length match {
-      case 1 =>
-        val hit = resp.getHits.hits()(0).getSource
-        val username = hit.get("name").toString
-        val email: Some[String] = Some(hit.get(EMAIL_TYPE).toString)
-        User(username, email, Some(""), Some(md5Hash(email.get)))
-      case _ => null
+  def userRetrieve(resp: String): User = {
+    val jObj = parse(resp)
+    try {
+      val name = jObj \\ "_source" \ "name"
+      val email = jObj \\ "_source" \ "email"
+      User(name.extract[String], Some(email.extract[String]), Some(""), Some(md5Hash(email.extract[String])))
+    } catch {
+      case e: Exception => null
     }
   }
 }

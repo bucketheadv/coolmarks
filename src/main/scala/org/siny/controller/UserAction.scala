@@ -2,8 +2,7 @@ package org.siny.controller
 
 import com.github.chengpohi.controller.UserController
 import com.github.chengpohi.model.User
-import org.elasticsearch.common.netty.handler.codec.http.HttpResponseStatus
-import org.elasticsearch.common.netty.handler.codec.http.HttpResponseStatus.{BAD_REQUEST, OK}
+import org.jboss.netty.handler.codec.http.HttpResponseStatus._
 import org.siny.web.cache.LoginUserCache
 import org.siny.web.response.HttpResponse
 import org.siny.web.rest.controller.RestAction
@@ -35,6 +34,6 @@ object UserAction extends RestAction {
   }
 
   def userInfo(httpSession: HttpSession): HttpResponse = {
-    HttpResponse("Hello Chengpohi", HttpResponseStatus.ACCEPTED)
+    HttpResponse("Hello Chengpohi", ACCEPTED)
   }
 }

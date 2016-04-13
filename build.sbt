@@ -24,12 +24,7 @@ val commonDependencies = Seq(
 )
 
 val elasticServiceDependencies = Seq(
-  "org.jsoup" % "jsoup" % "1.7.2",
-  "com.typesafe.akka" %% "akka-remote" % "2.3.8",
-  "com.sksamuel.elastic4s" % "elastic4s-core_2.11" % "1.7.5",
-  "com.fasterxml.jackson.core" % "jackson-core" % "2.4.2",
-  "com.fasterxml.jackson.core" % "jackson-databind" % "2.4.2",
-  "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.4.2"
+  "com.github.chengpohi" % "elasticshell_2.11" % "0.1"
 )
 
 lazy val elasticservice = project.in(file("elasticservice"))

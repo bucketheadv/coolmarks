@@ -1,11 +1,11 @@
 package org.siny.web.rest.controller
 
 import com.github.chengpohi.model.User
-import org.elasticsearch.common.netty.handler.codec.http.HttpResponseStatus
-import org.scalatest.FlatSpec
-import org.siny.web.response.HttpResponse
+import org.jboss.netty.handler.codec.http.HttpResponseStatus
 import org.json4s._
 import org.json4s.native.JsonMethods._
+import org.scalatest.FlatSpec
+import org.siny.web.response.HttpResponse
 
 /**
  * siny

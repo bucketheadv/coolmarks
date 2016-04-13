@@ -1,6 +1,5 @@
 package org.siny.app
 
-import com.github.chengpohi.controller.ElasticController
 import org.siny.controller.BookMarkController.{postBookMark, _}
 import org.siny.controller.TabController._
 import org.siny.controller.UserAction.{registerUser, userInfo, userLogin}
@@ -13,10 +12,6 @@ import org.siny.web.rest.controller.RestController._
  */
 object CoolMark extends Siny {
   def main(args: Array[String]): Unit = {
-    if (ElasticController.client == null) {
-      println("Connect Elastic Failed")
-      System.exit(1)
-    }
     this.initialize()
   }
 

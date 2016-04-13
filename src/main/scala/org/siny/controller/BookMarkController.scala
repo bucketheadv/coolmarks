@@ -1,8 +1,8 @@
 package org.siny.controller
 
-import com.github.chengpohi.controller.ElasticController._
+import com.github.chengpohi.controller.BookMarkController._
 import com.github.chengpohi.model.BookMark
-import org.elasticsearch.common.netty.handler.codec.http.HttpResponseStatus.OK
+import org.jboss.netty.handler.codec.http.HttpResponseStatus._
 import org.siny.web.response.HttpResponse
 import org.siny.web.rest.controller.RestAction
 import org.siny.web.session.HttpSession
@@ -13,7 +13,7 @@ import org.siny.web.session.HttpSession
  */
 object BookMarkController extends RestAction{
   def getBookMarks(httpSession: HttpSession): HttpResponse = {
-    HttpResponse(getBookMarksWithJson(httpSession.user), OK)
+    HttpResponse(getAllBookmarks(httpSession.user), OK)
   }
 
   def postBookMark(httpSession: HttpSession, bookMark: BookMark): HttpResponse = {

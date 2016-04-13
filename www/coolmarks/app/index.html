@@ -27,10 +27,10 @@
 
       <div class="marks">
         <ul class="tabs nav nav-tabs">
-          <li ng-repeat="(tab, bookmarks) in user.bookmark"
-          ng-class="{'active': tab === 'My Indeed' }">
-          <a href="#{{ bookmarks.id }}" data-toggle="tab">
-            {{ tab }}
+          <li ng-repeat="tab in user.bookmark"
+          ng-class="{'active': tab.name === 'My Indeed' }">
+          <a href="#{{ tab.name }}" data-toggle="tab">
+            {{ tab.name }}
           </a>
           </li>
         </ul>
@@ -58,10 +58,10 @@
               </li>
             </ul>
           </div>
-          <div ng-repeat="(tab, bookmarks) in user.bookmark"
-            class="tab-pane fade in" id="{{ bookmarks.id }}"
+          <div ng-repeat="tab in user.bookmark"
+            class="tab-pane fade in" id="{{ tab.name }}"
             ng-show="!searchBookMark"
-            ng-class="{'active': tab === 'My Indeed' }">
+            ng-class="{'active': tab.name === 'My Indeed' }">
             <div ng-if="tab === 'My Indeed'">
               <div class="statistical">
                 <iframe src="http://tracemarker.com:5601/#/dashboard/coolmarks?embed&_a=(filters:!(),panels:!((col:1,id:tag_statistic,row:4,size_x:12,size_y:2,type:visualization),(col:1,columns:!(_source),id:Last-24-hours,row:6,size_x:12,size_y:2,sort:!(created_at,desc),type:search),(col:1,id:vertical_bar_bookmarks,row:1,size_x:12,size_y:3,type:visualization)),query:(query_string:(analyze_wildcard:!t,query:'*')),title:coolmarks)&_g=(refreshInterval:(display:Off,pause:!f,section:0,value:0),time:(from:now-1y,mode:quick,to:now))" height="1000" width="800"></iframe>
@@ -69,10 +69,10 @@
             </div>
             <div ng-if="tab !== 'My Indeed'">
               <ul class="bs-glyphicons-list">
-                <li ng-repeat="bookmark in bookmarks.marks | orderBy:'-created_at'">
+                <li ng-repeat="bookmark in tab.bookmark | orderBy:'-created_at'">
                 <div class="markItem">
                   <i class="glyphicon fa fa-trash fa-2x"
-                    ng-click="removeMarkItem(user, tab, $index)"></i>
+                    ng-click="removeMarkItem(user, tab.name, $index)"></i>
                   <a href="{{bookmark.url}}" target="_blank">
                     <div class="markBlock">
                       <div class="markUrl">
@@ -115,8 +115,8 @@
             <div class="form-group">
               <label for="bookmarkUrl">BookMark Tab</label>
               <select ng-model="bookmarkTab" id="bookmarkTab" class="form-control">
-                <option ng-repeat="(tab, bookmarks) in user.bookmark" ng-if="tab != 'All'"
-                value='{"name": "{{tab}}", "id": "{{bookmarks.id}}" }'>{{ tab }}
+                <option ng-repeat="tab in user.bookmark" ng-if="tab.name !== 'My Indeed'"
+                value='{"name": "{{tab.name}}", "id": "{{tab._tab_id}}" }'>{{ tab.name }}
                 </option>
               </select>
             </div>

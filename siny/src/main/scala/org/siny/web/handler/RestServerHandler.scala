@@ -1,11 +1,11 @@
 package org.siny.web.handler
 
 import com.github.chengpohi.model.User
-import org.elasticsearch.common.netty.channel._
-import org.elasticsearch.common.netty.handler.codec.http.HttpMethod.{DELETE, GET, POST, PUT}
-import org.elasticsearch.common.netty.handler.codec.http.HttpResponseStatus.BAD_REQUEST
-import org.elasticsearch.common.netty.handler.codec.http.{HttpHeaders, HttpRequest}
-import org.elasticsearch.common.netty.util.CharsetUtil
+import org.jboss.netty.channel.{ChannelHandlerContext, ChannelStateEvent, ExceptionEvent, MessageEvent, SimpleChannelUpstreamHandler}
+import org.jboss.netty.handler.codec.http.HttpHeaders.Names._
+import org.jboss.netty.handler.codec.http.HttpRequest
+import org.jboss.netty.handler.codec.http.HttpResponseStatus.BAD_REQUEST
+import org.jboss.netty.util.CharsetUtil
 import org.json4s._
 import org.json4s.native.JsonMethods._
 import org.siny.web.cache.LoginUserCache
@@ -36,7 +36,7 @@ class RestServerHandler extends SimpleChannelUpstreamHandler {
     val uri: String = httpRequest.getUri
 
     LOG.info("IP: " + e.getRemoteAddress + " VISIT URL: " + uri + " Method:" + httpRequest.getMethod)
-    val f: (Any, Manifest[_]) = httpRequest.getMethod match {
+    val f: (Any, Manifest[_]) = httpRequest.getMethod.getName match {
       case GET => getActions.getOrElse(uri, null)
       case POST => postActions.getOrElse(uri, null)
       case PUT => putActions.getOrElse(uri, null)
@@ -56,7 +56,7 @@ class RestServerHandler extends SimpleChannelUpstreamHandler {
   }
 
   def executehandler(f: (Any, Manifest[_]), httpSession: HttpSession): HttpResponse = {
-    httpSession.httpRequest.getMethod match {
+    httpSession.httpRequest.getMethod.getName match {
       case GET =>
         def getAction[A] = f._1.asInstanceOf[A => HttpResponse]
 
@@ -88,9 +88,9 @@ class RestServerHandler extends SimpleChannelUpstreamHandler {
   }
 
   def visitHandler(ctx: ChannelHandlerContext, httpRequest: HttpRequest): User = {
-    if (httpRequest.headers().get(HttpHeaders.Names.COOKIE) == null) return null
+    if (httpRequest.headers().get(COOKIE) == null) return null
     val user = for {
-      c <- httpRequest.headers().get(HttpHeaders.Names.COOKIE).split(";")
+      c <- httpRequest.headers().get(COOKIE).split(";")
       if c.trim.matches("cookieID=.+")
     } yield LoginUserCache.LOGINED_USER.getOrElse(c.split("=")(1), null)
 

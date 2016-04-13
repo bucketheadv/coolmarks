@@ -15,7 +15,7 @@ siny.controller('sinyCtrl', function($scope, $http, $window, sinyService, localS
 
   $http.get("/bookmark").success(function(data, status, headers, config) {
     $scope.user.bookmark = data;
-    $scope.user.bookmark["My Indeed"] = { "id": "tracemarker_indeed_id"};
+    $scope.user.bookmark.push({"name": "My Indeed"});
     localStorageService.set("chengpohi", $scope.user);
   }).error(function(data, status, headers, config) {
     $scope.user = getItem("chengpohi");
@@ -25,7 +25,8 @@ siny.controller('sinyCtrl', function($scope, $http, $window, sinyService, localS
   $scope.append = function (user, bookMarkName, bookMarkUrl, bookMarkTab) {
     var bm = {'url': bookMarkUrl, 'name': bookMarkName};
     var bmt = angular.fromJson(bookMarkTab);
-    user.bookmark[bmt.name].marks.push(bm);
+
+    appendBookMark(user.bookmark, bmt.name, bm);
 
     postBookMark(bookMarkName, bookMarkUrl, bmt.id);
 
@@ -39,8 +40,7 @@ siny.controller('sinyCtrl', function($scope, $http, $window, sinyService, localS
   };
 
   $scope.removeMarkItem = function(user, tab, index) {
-    var bookMarkId = user.bookmark[tab]["marks"][index].id;
-    user.bookmark[tab]["marks"].splice(index, 1);
+    var bookMarkId = removeBookMark(user.bookmark, tab, index)
     deleteBookMark(bookMarkId);
   }
 
@@ -74,4 +74,24 @@ siny.controller('sinyCtrl', function($scope, $http, $window, sinyService, localS
       alert(data);
     });
   }
+
+  function appendBookMark(bookmarks, tabName, value) {
+    for (var i in bookmarks) {
+      if (bookmarks[i].name === tabName) {
+        bookmarks[i].bookmark.push(value);
+      }
+    }
+  }
+
+  function removeBookMark(bookmarks, tabName, index) {
+    for (var i in bookmarks) {
+      if (bookmarks[i].name === tabName) {
+        var bookMarkId = bookmarks[i].bookmark[index].id
+        bookmarks[i].bookmark.splice(index, 1);
+        return bookMarkId;
+      }
+    }
+    return -1;
+  }
+
 });

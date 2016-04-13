@@ -1,7 +1,7 @@
 package org.siny.web.session
 
 import com.github.chengpohi.model.User
-import org.elasticsearch.common.netty.handler.codec.http.HttpRequest
+import org.jboss.netty.handler.codec.http.HttpRequest
 
 /**
  * HttpSession for communicating

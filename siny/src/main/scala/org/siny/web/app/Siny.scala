@@ -4,11 +4,11 @@ import java.net.InetSocketAddress
 import java.util.concurrent.Executors
 
 import com.typesafe.config.ConfigFactory
-import org.elasticsearch.common.netty.bootstrap.ServerBootstrap
-import org.elasticsearch.common.netty.channel.socket.nio.NioServerSocketChannelFactory
-import org.elasticsearch.common.netty.channel.{ChannelPipeline, ChannelPipelineFactory, Channels}
-import org.elasticsearch.common.netty.handler.codec.http.{HttpChunkAggregator, HttpRequestDecoder, HttpResponseEncoder}
-import org.elasticsearch.common.netty.handler.stream.ChunkedWriteHandler
+import org.jboss.netty.bootstrap.ServerBootstrap
+import org.jboss.netty.channel.{ChannelPipeline, ChannelPipelineFactory, Channels}
+import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory
+import org.jboss.netty.handler.codec.http.{HttpChunkAggregator, HttpRequestDecoder, HttpResponseEncoder}
+import org.jboss.netty.handler.stream.ChunkedWriteHandler
 import org.siny.web.handler.RestServerHandler
 import org.slf4j.LoggerFactory
 

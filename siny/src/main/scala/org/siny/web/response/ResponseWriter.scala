@@ -3,16 +3,15 @@ package org.siny.web.response
 import java.io.{File, RandomAccessFile}
 import java.net.URL
 
-import org.elasticsearch.common.netty.buffer.ChannelBuffers
-import org.elasticsearch.common.netty.channel.Channel
-import org.elasticsearch.common.netty.handler.codec.http.HttpHeaders.Names.{CONNECTION, CONTENT_LENGTH, CONTENT_TYPE, SET_COOKIE}
-import org.elasticsearch.common.netty.handler.codec.http.HttpHeaders.Values.KEEP_ALIVE
-import org.elasticsearch.common.netty.handler.codec.http.HttpResponseStatus._
-import org.elasticsearch.common.netty.handler.codec.http.HttpVersion.HTTP_1_1
-import org.elasticsearch.common.netty.handler.codec.http.{DefaultHttpResponse, HttpResponseStatus}
-import org.elasticsearch.common.netty.handler.stream.ChunkedFile
-import org.siny.web.file.FileUtils
-import FileUtils._
+import org.jboss.netty.buffer.ChannelBuffers
+import org.jboss.netty.channel.Channel
+import org.jboss.netty.handler.codec.http.HttpHeaders.Names._
+import org.jboss.netty.handler.codec.http.HttpHeaders.Values.KEEP_ALIVE
+import org.jboss.netty.handler.codec.http.HttpResponseStatus._
+import org.jboss.netty.handler.codec.http.HttpVersion._
+import org.jboss.netty.handler.codec.http.{DefaultHttpResponse, HttpResponseStatus}
+import org.jboss.netty.handler.stream.ChunkedFile
+import org.siny.web.file.FileUtils._
 import org.siny.web.session.HttpSession
 
 /**

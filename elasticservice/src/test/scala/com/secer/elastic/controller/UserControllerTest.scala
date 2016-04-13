@@ -1,8 +1,8 @@
 package com.secer.elastic.controller
 
-import com.github.chengpohi.controller.{UserController, ElasticController}
+import com.github.chengpohi.controller.{UserController, BookMarkController}
 import com.github.chengpohi.model.User
-import com.github.chengpohi.util.HashUtil
+import com.github.chengpohi.util.ElasticUtil
 import org.scalatest.{BeforeAndAfter, FlatSpec}
 
 /**
@@ -21,9 +21,5 @@ class UserControllerTest extends FlatSpec with BeforeAndAfter{
     val userWithoutCorrectPassword = User("", Some("com.github.chengpohi@gmail.com"), Some("123456"))
     Thread.sleep(1000)
     assert(UserController.validateUserLogin(userWithoutCorrectPassword) == null)
-  }
-
-  after {
-    ElasticController.deleteIndexByIndexName(user.name)
   }
 }

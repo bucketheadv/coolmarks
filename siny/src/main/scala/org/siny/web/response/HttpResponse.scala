@@ -1,6 +1,6 @@
 package org.siny.web.response
 
-import org.elasticsearch.common.netty.handler.codec.http.HttpResponseStatus
+import org.jboss.netty.handler.codec.http.HttpResponseStatus
 
 /**
  * siny

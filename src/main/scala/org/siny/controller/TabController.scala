@@ -1,8 +1,9 @@
 package org.siny.controller
 
-import com.github.chengpohi.controller.ElasticController.{createTab, deleteTabById}
+import com.github.chengpohi.controller.BookMarkController.{createTab, deleteTabById}
 import com.github.chengpohi.model.Tab
-import org.elasticsearch.common.netty.handler.codec.http.HttpResponseStatus.OK
+import org.jboss.netty.handler.codec.http.HttpResponseStatus
+import org.jboss.netty.handler.codec.http.HttpResponseStatus.OK
 import org.siny.web.response.HttpResponse
 import org.siny.web.rest.controller.RestAction
 import org.siny.web.session.HttpSession
