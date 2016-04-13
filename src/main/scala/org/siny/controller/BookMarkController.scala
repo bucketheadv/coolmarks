@@ -2,6 +2,7 @@ package org.siny.controller
 
 import com.github.chengpohi.controller.BookMarkController._
 import com.github.chengpohi.model.BookMark
+import com.github.chengpohi.util.ElasticUtil
 import org.jboss.netty.handler.codec.http.HttpResponseStatus._
 import org.siny.web.response.HttpResponse
 import org.siny.web.rest.controller.RestAction
@@ -17,8 +18,10 @@ object BookMarkController extends RestAction{
   }
 
   def postBookMark(httpSession: HttpSession, bookMark: BookMark): HttpResponse = {
-    createBookMark(httpSession.user, bookMark)
-    HttpResponse("Create Success", OK)
+    val result = createBookMark(httpSession.user, bookMark)
+    val bookMarkId = ElasticUtil.parseId(result)
+    val b = bookMark.copy(id = Some(bookMarkId))
+    HttpResponse(ElasticUtil.bookmarkToJson(b), OK)
   }
 
   def deleteBookMark(httpSession: HttpSession): HttpResponse = {

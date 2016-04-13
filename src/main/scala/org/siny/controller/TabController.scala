@@ -2,7 +2,7 @@ package org.siny.controller
 
 import com.github.chengpohi.controller.BookMarkController.{createTab, deleteTabById}
 import com.github.chengpohi.model.Tab
-import org.jboss.netty.handler.codec.http.HttpResponseStatus
+import com.github.chengpohi.util.ElasticUtil
 import org.jboss.netty.handler.codec.http.HttpResponseStatus.OK
 import org.siny.web.response.HttpResponse
 import org.siny.web.rest.controller.RestAction
@@ -15,7 +15,9 @@ import org.siny.web.session.HttpSession
 object TabController extends RestAction {
   def postTab(httpSession: HttpSession, tab: Tab): HttpResponse = {
     val resultId = createTab(httpSession.user, tab)
-    HttpResponse(resultId, OK)
+    val tabId = ElasticUtil.parseId(resultId)
+    val t = tab.copy(id = Some(tabId))
+    HttpResponse(ElasticUtil.tabToJson(t), OK)
   }
 
   def deleteTab(httpSession: HttpSession): HttpResponse = {

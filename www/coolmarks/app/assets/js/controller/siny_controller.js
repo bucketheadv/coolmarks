@@ -15,7 +15,7 @@ siny.controller('sinyCtrl', function($scope, $http, $window, sinyService, localS
 
   $http.get("/bookmark").success(function(data, status, headers, config) {
     $scope.user.bookmark = data;
-    $scope.user.bookmark.push({"name": "My Indeed"});
+    $scope.user.bookmark.push({"name": "My Indeed", id: "myIndeed"});
     localStorageService.set("chengpohi", $scope.user);
   }).error(function(data, status, headers, config) {
     $scope.user = getItem("chengpohi");
@@ -24,11 +24,9 @@ siny.controller('sinyCtrl', function($scope, $http, $window, sinyService, localS
 
   $scope.append = function (user, bookMarkName, bookMarkUrl, bookMarkTab) {
     var bm = {'url': bookMarkUrl, 'name': bookMarkName};
-    var bmt = angular.fromJson(bookMarkTab);
+    var tab = angular.fromJson(bookMarkTab);
 
-    appendBookMark(user.bookmark, bmt.name, bm);
-
-    postBookMark(bookMarkName, bookMarkUrl, bmt.id);
+    postBookMark(user, bookMarkName, bookMarkUrl, tab);
 
     $scope.bookMarkName = '';
     $scope.bookMarkUrl = '';
@@ -50,15 +48,17 @@ siny.controller('sinyCtrl', function($scope, $http, $window, sinyService, localS
 
   function postTab(tabName, user) {
     $http.post('/tab', {'name': tabName}).success(function(data, status, headers, config) {
-      user.bookmark[tabName] = {"marks": [], "id": data};
+      data["bookmark"] = [];
+      user.bookmark.push(data);
       alert("Add " + tabName + " Success");
     }).error(function(data, status, headers, config) {
       alert(data);
     });
   }
 
-  function postBookMark(bookMarkName, bookMarkUrl, bookMarkTabId) {
-    $http.post('/bookmark', {'name': bookMarkName, 'url': bookMarkUrl, 'tabId': bookMarkTabId}).success(function(data, status, headers, config) {
+  function postBookMark(user, bookMarkName, bookMarkUrl, tab) {
+    $http.post('/bookmark', {'name': bookMarkName, 'url': bookMarkUrl, 'tabId': tab.id}).success(function(data, status, headers, config) {
+      appendBookMark(user.bookmark, tab.name, data);
       alert("create " + bookMarkName + " success");
     })
     .error(function(data, status, headers, config) {
