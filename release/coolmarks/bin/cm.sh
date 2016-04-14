@@ -18,4 +18,4 @@ SINY_HOME=`dirname "$SCRIPT"`/..
 SINY_HOME=`cd "$SINY_HOME"; pwd`
 
 
-java -cp conf/:lib/webservice.jar org.siny.app.CoolMark
+java -cp conf/:lib/coolmarks.jar com.github.chengpohi.app.CoolMark

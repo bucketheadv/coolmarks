@@ -33,6 +33,7 @@ lazy val elasticservice = project.in(file("elasticservice"))
   .settings(
     assemblyMergeStrategy in assembly := {
       case "application.conf" => MergeStrategy.discard
+      case PathList("org", "joda", "time", "base", "BaseDateTime.class") => MergeStrategy.first
       case x =>
         val oldStrategy = (assemblyMergeStrategy in assembly).value
         oldStrategy(x)
@@ -56,9 +57,10 @@ lazy val siny = project.in(file("siny"))
 lazy val coolmarks = (project in file("."))
   .settings(commonSettings: _*)
   .settings(
-    assemblyJarName in assembly := "webservice.jar",
+    assemblyJarName in assembly := "coolmarks.jar",
     assemblyMergeStrategy in assembly := {
       case "application.conf" => MergeStrategy.discard
+      case PathList("org", "joda", "time", "base", "BaseDateTime.class") => MergeStrategy.first
       case x =>
         val oldStrategy = (assemblyMergeStrategy in assembly).value
         oldStrategy(x)
