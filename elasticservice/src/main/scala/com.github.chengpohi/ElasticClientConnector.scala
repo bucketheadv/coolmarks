@@ -20,4 +20,17 @@ object ElasticClientConnector {
   val port: Int = indexConfig.getInt("port")
   val uri = ElasticsearchClientUri(s"elasticsearch://$host:$port")
   val client = ElasticClient.local(settings)
+/*
+  val settings = Settings.settingsBuilder()
+    .put("cluster.name", "secdata")
+    .build()
+  val host: String = indexConfig.getString("host")
+  val port: Int = indexConfig.getInt("port")
+
+  val client = buildClient(settings, host, port)
+
+  def buildClient(settings: Settings, host: String, port: Int) = {
+    val uri = ElasticsearchClientUri(s"elasticsearch://$host:$port")
+    ElasticClient.transport(settings, uri)
+  }*/
 }
