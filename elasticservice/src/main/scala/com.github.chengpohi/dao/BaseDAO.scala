@@ -1,4 +1,4 @@
-package com.github.chengpohi.controller
+package com.github.chengpohi.dao
 
 import com.github.chengpohi.{ELKRunEngine, ElasticClientConnector}
 import com.github.chengpohi.model.{Field, Tab}
@@ -23,8 +23,8 @@ import scala.io.Source
  * ElasticBase function
  * Created by com.github.chengpohi on 6/28/15.
  */
-class DAOBase {
-  val elkRunEngine = new ELKRunEngine(ELKCommandRegistry)
+class BaseDAO {
+  val elkRunEngine = new ELKRunEngine(ELKComponentRegistry)
   val ELK_PROPERTIES = ConfigFactory.load("elk.properties")
 
   val BOOKMARK_TYPE: String = "bookmark"

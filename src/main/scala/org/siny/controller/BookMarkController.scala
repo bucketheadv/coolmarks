@@ -1,6 +1,6 @@
 package org.siny.controller
 
-import com.github.chengpohi.controller.BookMarkController._
+import com.github.chengpohi.dao.BookMarkDAO._
 import com.github.chengpohi.model.BookMark
 import com.github.chengpohi.util.ElasticUtil
 import org.jboss.netty.handler.codec.http.HttpResponseStatus._

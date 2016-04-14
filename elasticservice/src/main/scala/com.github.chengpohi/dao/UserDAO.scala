@@ -1,4 +1,4 @@
-package com.github.chengpohi.controller
+package com.github.chengpohi.dao
 
 import com.github.chengpohi.model.User
 import com.github.chengpohi.util.ElasticUtil
@@ -10,7 +10,7 @@ import org.json4s.native.JsonMethods._
   * BookMark model
   * Created by com.github.chengpohi on 7/29/15.
   */
-object UserController extends DAOBase {
+object UserDAO extends BaseDAO {
   implicit val formats = DefaultFormats
 
   val EMAIL_TYPE: String = "email"

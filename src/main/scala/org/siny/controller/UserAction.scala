@@ -1,6 +1,6 @@
 package org.siny.controller
 
-import com.github.chengpohi.controller.UserController
+import com.github.chengpohi.dao.UserDAO
 import com.github.chengpohi.model.User
 import org.jboss.netty.handler.codec.http.HttpResponseStatus._
 import org.siny.web.cache.LoginUserCache
@@ -19,12 +19,12 @@ object UserAction extends RestAction {
   val LOGIN_SUCCESSFUL_TIP: String = "Login Successfully"
 
   def registerUser(user: User): HttpResponse = {
-    val resultId = UserController.createUserInfo(user)
+    val resultId = UserDAO.createUserInfo(user)
     HttpResponse(resultId, OK)
   }
 
   def userLogin(user: User): HttpResponse = {
-    UserController.validateUserLogin(user) match {
+    UserDAO.validateUserLogin(user) match {
       case u: User =>
         LoginUserCache.LOGINED_USER += u.cookie.get -> u
         HttpResponse(LOGIN_SUCCESSFUL_TIP, OK, Option(u.cookie.get))

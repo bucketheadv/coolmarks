@@ -1,6 +1,6 @@
 package com.secer.elastic.controller
 
-import com.github.chengpohi.controller.BookMarkController
+import com.github.chengpohi.dao.BookMarkDAO
 import com.github.chengpohi.model._
 import org.scalatest.FlatSpec
 
@@ -8,13 +8,13 @@ import org.scalatest.FlatSpec
  * ElasticController Test
  * Created by xiachen on 5/16/15.
  */
-class BookMarkControllerTest extends FlatSpec {
+class BookMarkDAOTest extends FlatSpec {
   val user = User("pipi" + System.currentTimeMillis(), Option("test123"))
   val tab = Tab(Option(""), "tino")
   val bookMark = BookMark(Option(""), "jack", "http://www.baidu.com", Some("somemd5asdfasdf"))
 
   "ElasticController " should " create user tab" in {
-    val resultId = BookMarkController.createTab(user, tab)
+    val resultId = BookMarkDAO.createTab(user, tab)
     assert(resultId != null)
   }
 

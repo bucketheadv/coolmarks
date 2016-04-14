@@ -1,6 +1,6 @@
 package org.siny.controller
 
-import com.github.chengpohi.controller.BookMarkController.{createTab, deleteTabById}
+import com.github.chengpohi.dao.BookMarkDAO.{createTab, deleteTabById}
 import com.github.chengpohi.model.Tab
 import com.github.chengpohi.util.ElasticUtil
 import org.jboss.netty.handler.codec.http.HttpResponseStatus.OK

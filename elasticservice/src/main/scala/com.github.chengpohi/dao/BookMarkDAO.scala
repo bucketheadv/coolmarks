@@ -1,4 +1,4 @@
-package com.github.chengpohi.controller
+package com.github.chengpohi.dao
 
 import com.github.chengpohi.model._
 import com.github.chengpohi.util.ElasticUtil.documentMapToJson
@@ -10,7 +10,7 @@ import scala.language.implicitConversions
  * Elastic Controller
  * Created by com.github.chengpohi on 3/1/15.
  */
-object BookMarkController extends DAOBase {
+object BookMarkDAO extends BaseDAO {
   lazy val LOG = LoggerFactory.getLogger(getClass.getName)
 
 
