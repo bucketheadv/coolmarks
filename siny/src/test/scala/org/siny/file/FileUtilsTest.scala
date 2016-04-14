@@ -1,7 +1,7 @@
 package org.siny.file
 
+import com.github.chengpohi.web.file.FileUtils
 import org.scalatest.FlatSpec
-import org.siny.web.file.FileUtils
 
 /**
  * Created by xiachen on 4/19/15.
