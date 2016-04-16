@@ -1,23 +1,7 @@
 package com.github.chengpohi.dao
 
-import com.github.chengpohi.{ELKRunEngine, ElasticClientConnector}
-import com.github.chengpohi.model.{Field, Tab}
-import com.github.chengpohi.util.ElasticUtil
-import com.github.chengpohi.util.ElasticUtil.readResourcesAsString
-import com.sksamuel.elastic4s.ElasticDsl._
-import com.sksamuel.elastic4s.SearchType.Scan
-import com.sksamuel.elastic4s.mappings.FieldType.{DateType, StringType}
-import com.sksamuel.elastic4s.source.{DocumentMap, JsonDocumentSource}
+import com.github.chengpohi.ELKRunEngine
 import com.typesafe.config.ConfigFactory
-import org.elasticsearch.action.get.GetResponse
-import org.elasticsearch.action.index.IndexResponse
-import org.elasticsearch.action.search.SearchResponse
-import org.elasticsearch.search.sort.SortOrder.ASC
-import org.elasticsearch.transport.RemoteTransportException
-
-import scala.concurrent.duration.Duration
-import scala.concurrent.{Await, Future}
-import scala.io.Source
 
 /**
  * ElasticBase function

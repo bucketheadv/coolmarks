@@ -1,12 +1,11 @@
 package com.github.chengpohi.app
 
-import com.github.chengpohi.controller.BookMarkController
-import BookMarkController.{postBookMark, _}
-import com.github.chengpohi.web.app.Siny
-import com.github.chengpohi.web.rest.controller.RestController
+import com.github.chengpohi.controller.BookMarkController.{postBookMark, _}
+import com.github.chengpohi.controller.StatisticController.statistic
 import com.github.chengpohi.controller.TabController._
 import com.github.chengpohi.controller.UserController._
-import RestController._
+import com.github.chengpohi.web.app.Siny
+import com.github.chengpohi.web.rest.controller.RestController._
 
 /**
  * siny
@@ -22,6 +21,7 @@ object CoolMark extends Siny {
     registerHandler(POST, "/login.html", userLogin)
     registerHandlerWithHttpSession(POST, "/bookmark", postBookMark)
     registerHandlerWithHttpSession(POST, "/tab", postTab)
+    registerHandlerWithHttpSession(POST, "/statistic", statistic)
 
     registerHandler(GET, "/bookmark", getBookMarks)
     registerHandler(GET, "/user.html", userInfo)
