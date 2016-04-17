@@ -1,6 +1,6 @@
 package com.github.chengpohi.model
 
-import com.github.chengpohi.util.HashUtil
+import com.github.chengpohi.util.ElasticUtil
 import com.sksamuel.elastic4s.source.DocumentMap
 
 /**
@@ -9,7 +9,8 @@ import com.sksamuel.elastic4s.source.DocumentMap
 case class User(name: String, email: Option[String] = None, password: Option[String] = None, cookie: Option[String] = None) extends DocumentMap {
   override def map: Map[String, Any] = Map(
     "name" -> name,
-    "password" -> HashUtil.md5Hash(password.get),
-    "email" -> email.get
+    "password" -> ElasticUtil.md5Hash(password.get),
+    "email" -> email.get,
+    "created_at" -> System.currentTimeMillis().toString
   )
 }

@@ -1,17 +1,15 @@
 package com.github.chengpohi
 
-import com.sksamuel.elastic4s.{ElasticsearchClientUri, ElasticClient}
-
+import com.sksamuel.elastic4s.{ElasticClient, ElasticsearchClientUri}
 import com.typesafe.config.ConfigFactory
-
-import org.elasticsearch.common.settings.ImmutableSettings
+import org.elasticsearch.common.settings.Settings
 
 /**
   * Created by com.github.chengpohi on 3/19/15.
   */
 object ElasticClientConnector {
   lazy val indexConfig = ConfigFactory.load("application.conf").getConfig("elastic")
-  lazy val settings = ImmutableSettings.settingsBuilder()
+  lazy val settings = Settings.settingsBuilder()
     .put("http.enabled", "false")
     .put("transport.enable", "false")
     .put("path.home", indexConfig.getString("path.home"))
@@ -22,4 +20,17 @@ object ElasticClientConnector {
   val port: Int = indexConfig.getInt("port")
   val uri = ElasticsearchClientUri(s"elasticsearch://$host:$port")
   val client = ElasticClient.local(settings)
+/*
+  val settings = Settings.settingsBuilder()
+    .put("cluster.name", "secdata")
+    .build()
+  val host: String = indexConfig.getString("host")
+  val port: Int = indexConfig.getInt("port")
+
+  val client = buildClient(settings, host, port)
+
+  def buildClient(settings: Settings, host: String, port: Int) = {
+    val uri = ElasticsearchClientUri(s"elasticsearch://$host:$port")
+    ElasticClient.transport(settings, uri)
+  }*/
 }

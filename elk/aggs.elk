@@ -1,1 +1,1 @@
-aggsCount "chengpohi" "bookmark" {"tags":{"terms": {"field": "name_tags", "size": 20}}}
+aggs count "chengpohi" "bookmark" {"tags":{"terms": {"field": "name_tags", "size": 20}}}
