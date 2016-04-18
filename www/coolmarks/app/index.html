@@ -3,6 +3,7 @@
 <script src="./assets/js/controller/siny_controller.js"></script>
 <script src="./assets/js/service/siny_service.js"></script>
 <script src="./component/manage/manage.js"></script>
+<script src="./component/bookmark/bookmark.js"></script>
 
 <link rel=stylesheet type=text/css href="./assets/css/style.css">
 <link rel=stylesheet type=text/css href="./assets/css/coolmarks.css">
@@ -11,79 +12,7 @@
 <title>Cool Marks, Your Own Marks</title>
 
 <body ng-app="siny" ng-controller="sinyCtrl">
-<manage user="user"></manage>
-<div class="container">
-    <div class="role">
-        <div class="col-md-12" role="main">
-            <input ng-model="searchBookMark" type="text" class="form-control">
-            <div class="marks">
-                <ul class="tabs nav nav-tabs">
-                    <li ng-repeat="tab in user.bookmark"
-                        ng-class="{'active': tab.name === 'My Indeed' }">
-                        <a href="#{{ tab.id }}" data-toggle="tab">
-                            {{ tab.name }}
-                        </a>
-                    </li>
-                </ul>
-                <div id="tabContent" class="tab-content">
-                    <div ng-show="searchBookMark">
-                        <ul class="bs-glyphicons-list"
-                            ng-repeat="tab in user.bookmark">
-                            <li ng-repeat="bookmark in tab.bookmark | orderBy:'-created_at' | filter:searchBookMark">
-                                <div class="markItem">
-                                    <i class="glyphicon fa fa-trash fa-2x"
-                                       ng-click="removeMarkItem(user, tab, bookmark)"></i>
-                                    <a href="{{bookmark.url}}" target="_blank">
-                                        <div class="markBlock">
-                                            <div class="markUrl">
-                                                {{bookmark.url | limitTo: 25}}
-                                                <p ng-bind="bookmark.created_at | date:'yyyy/MM/dd'"></p>
-                                            </div>
-                                            <hr/>
-                                            <div class="markInfo">
-                                                {{bookmark.name | limitTo: 20}}
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div ng-repeat="tab in user.bookmark"
-                         class="tab-pane fade in" id="{{ tab.id }}"
-                         ng-show="!searchBookMark"
-                         ng-class="{'active': tab.name === 'My Indeed' }">
-                        <div ng-if="tab.name === 'My Indeed'">
-                            <div class="statistical">
-                            </div>
-                        </div>
-                        <div ng-if="tab !== 'My Indeed'">
-                            <ul class="bs-glyphicons-list">
-                                <li ng-repeat="bookmark in tab.bookmark | orderBy:'-created_at'">
-                                    <div class="markItem">
-                                        <i class="glyphicon fa fa-trash fa-2x"
-                                           ng-click="removeMarkItem(user, tab.name, bookmark)"></i>
-                                        <a href="{{bookmark.url}}" target="_blank">
-                                            <div class="markBlock">
-                                                <div class="markUrl">
-                                                    {{bookmark.url | limitTo: 25}}
-                                                    <p ng-bind="bookmark.created_at | date:'yyyy/MM/dd'"></p>
-                                                </div>
-                                                <hr/>
-                                                <div class="markInfo">
-                                                    {{bookmark.name | limitTo: 20}}
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+  <manage user="user"></manage>
+  <bookmark user="user"></bookmark>
 </body>
 </html>
