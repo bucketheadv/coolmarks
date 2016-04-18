@@ -8,25 +8,12 @@ siny.config(function (localStorageServiceProvider) {
 });
 
 siny.controller('sinyCtrl', function($scope, $http, $window, sinyService, localStorageService) {
-  var bookMarkName = $scope.bookMarkName;
-  var bookMarkUrl = $scope.bookMarkUrl;
-
   $scope.user = { bookmark: [] };
 
   sinyService.getBookMarks(getBookMarksSuccess, getBookMarksFail)
 
-  $scope.append = function (user, bookMarkName, bookMarkUrl, bookMarkTab) {
-    var bm = {'url': bookMarkUrl, 'name': bookMarkName};
-    var tab = angular.fromJson(bookMarkTab);
-    sinyService.postBookMark(user, bookMarkName, bookMarkUrl, tab);
-  };
-
-  $scope.addTab = function (user, tabName) {
-    sinyService.postTab(tabName, user);
-  };
-
-  $scope.removeMarkItem = function(user, tab, index) {
-    var bookMarkId = sinyService.removeBookMark(user.bookmark, tab, index)
+  $scope.removeMarkItem = function(user, tab, bookmark) {
+    var bookMarkId = sinyService.removeBookMark(user.bookmark, tab, bookmark)
     sinyService.deleteBookMark(bookMarkId);
   }
 
