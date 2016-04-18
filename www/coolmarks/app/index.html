@@ -2,6 +2,8 @@
 <script src="./js/app.js"></script>
 <script src="./js/controller/siny_controller.js"></script>
 <script src="./js/service/siny_service.js"></script>
+<script src="./component/manage/manage.js"></script>
+<script src="./component/bookmark/bookmark.js"></script>
 
 <link rel=stylesheet type=text/css href="./assets/css/style.css">
 <link rel=stylesheet type=text/css href="./assets/css/coolmarks.css">
@@ -10,152 +12,7 @@
 <title>Cool Marks, Your Own Marks</title>
 
 <body ng-app="siny" ng-controller="sinyCtrl">
-<div class="manager">
-  <nav class="navbar navbar-light bg-faded">
-    <a id="modal-795914" href="#modal-container-795914" role="button" class="tool-btn btn btn-success"
-      data-toggle="modal">Mark</a>
-  </nav>
-  <nav>
-    <a id="modal-795915" href="#modal-container-795915" role="button" class="tool-btn btn btn-success"
-      data-toggle="modal">AddTab</a>
-  </nav>
-</div>
-<div class="container">
-  <div class="role">
-    <div class="col-md-12" role="main">
-      <input ng-model="searchBookMark" type="text" class="form-control">
-
-      <div class="marks">
-        <ul class="tabs nav nav-tabs">
-          <li ng-repeat="tab in user.bookmark"
-          ng-class="{'active': tab.name === 'My Indeed' }">
-          <a href="#{{ tab.id }}" data-toggle="tab">
-            {{ tab.name }}
-          </a>
-          </li>
-        </ul>
-        <div id="tabContent" class="tab-content">
-          <div ng-show="searchBookMark">
-            <ul class="bs-glyphicons-list"
-              ng-repeat="tab in user.bookmark">
-              <li ng-repeat="bookmark in tab.bookmark | orderBy:'-created_at' | filter:searchBookMark">
-              <div class="markItem">
-                <i class="glyphicon fa fa-trash fa-2x"
-                  ng-click="removeMarkItem(user, tab, $index)"></i>
-                <a href="{{bookmark.url}}" target="_blank">
-                  <div class="markBlock">
-                    <div class="markUrl">
-                      {{bookmark.url | limitTo: 25}}
-                      <p ng-bind="bookmark.created_at | date:'yyyy/MM/dd'"></p>
-                    </div>
-                    <hr/>
-                    <div class="markInfo">
-                      {{bookmark.name | limitTo: 20}}
-                    </div>
-                  </div>
-                </a>
-              </div>
-              </li>
-            </ul>
-          </div>
-          <div ng-repeat="tab in user.bookmark"
-            class="tab-pane fade in" id="{{ tab.id }}"
-            ng-show="!searchBookMark"
-            ng-class="{'active': tab.name === 'My Indeed' }">
-            <div ng-if="tab.name === 'My Indeed'">
-              <div class="statistical">
-              </div>
-            </div>
-            <div ng-if="tab !== 'My Indeed'">
-              <ul class="bs-glyphicons-list">
-                <li ng-repeat="bookmark in tab.bookmark | orderBy:'-created_at'">
-                <div class="markItem">
-                  <i class="glyphicon fa fa-trash fa-2x"
-                    ng-click="removeMarkItem(user, tab.name, $index)"></i>
-                  <a href="{{bookmark.url}}" target="_blank">
-                    <div class="markBlock">
-                      <div class="markUrl">
-                        {{bookmark.url | limitTo: 25}}
-                        <p ng-bind="bookmark.created_at | date:'yyyy/MM/dd'"></p>
-                      </div>
-                      <hr/>
-                      <div class="markInfo">
-                        {{bookmark.name | limitTo: 20}}
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  <div class="modal fade" id="modal-container-795914" role="dialog" aria-labelledby="addBookMark" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h4 class="modal-title" id="addBookMark">Append A BookMark</h4>
-        </div>
-        <div class="modal-body">
-          <form role="form">
-            <div class="form-group">
-              <label for="bookmarkName">BookMark Name</label>
-              <input type="text" ng-model="bookmarkName" id="bookmarkName" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="bookmarkUrl">BookMark Address</label>
-              <input type="text" ng-model="bookmarkUrl" id="bookmarkUrl" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="bookmarkUrl">BookMark Tab</label>
-              <select ng-model="bookmarkTab" id="bookmarkTab" class="form-control">
-                <option ng-repeat="tab in user.bookmark" ng-if="tab.name !== 'My Indeed'"
-                value='{"name": "{{tab.name}}", "id": "{{tab._tab_id}}" }'>{{ tab.name }}
-                </option>
-              </select>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" data-dismiss="modal"
-            ng-click='append(user, bookmarkName, bookmarkUrl, bookmarkTab)'
-            class="btn btn-primary">Append
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="modal-container-795915" role="dialog" aria-labelledby="addTab" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h4 class="modal-title" id="addTab">Add A Tab</h4>
-        </div>
-        <div class="modal-body">
-          <form role="form">
-            <div class="form-group">
-              <label for="bookmarkName">Tab Name</label>
-              <input type="text" ng-model="tabName" id="tabName" class="form-control">
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" data-dismiss="modal"
-            ng-click='addTab(user, tabName)'
-            class="btn btn-primary">Add
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+  <manage user="user"></manage>
+  <bookmark user="user"></bookmark>
 </body>
 </html>

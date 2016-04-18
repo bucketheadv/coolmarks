@@ -44,10 +44,11 @@ angular.module('siny')
     }
   }
 
-  var removeBookMark = function (bookmarks, tabName, index) {
+  var removeBookMark = function (bookmarks, tabName, bookmark) {
     for (var i in bookmarks) {
       if (bookmarks[i].name === tabName) {
-        var bookMarkId = bookmarks[i].bookmark[index].id
+        var bookMarkId = bookmark.id
+        var index = bookmarks.indexOf(bookmark);
         bookmarks[i].bookmark.splice(index, 1);
         return bookMarkId;
       }

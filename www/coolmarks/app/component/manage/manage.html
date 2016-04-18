@@ -1,0 +1,72 @@
+<div class="manager">
+    <nav class="navbar navbar-light bg-faded">
+        <a id="modal-795914" href="#modal-container-795914" role="button" class="tool-btn btn btn-success"
+           data-toggle="modal">Mark</a>
+    </nav>
+    <nav>
+        <a id="modal-795915" href="#modal-container-795915" role="button" class="tool-btn btn btn-success"
+           data-toggle="modal">AddTab</a>
+    </nav>
+</div>
+<div class="modal fade" id="modal-container-795914" role="dialog" aria-labelledby="addBookMark" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="addBookMark">Append A BookMark</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="bookmarkName">BookMark Name</label>
+                        <input type="text" ng-model="bookmarkName" id="bookmarkName" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookmarkUrl">BookMark Address</label>
+                        <input type="text" ng-model="bookmarkUrl" id="bookmarkUrl" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookmarkUrl">BookMark Tab</label>
+                        <select ng-model="bookmarkTab" id="bookmarkTab" class="form-control">
+                            <option ng-repeat="tab in user.bookmark" ng-if="tab.name !== 'My Indeed'"
+                                    value='{"name": "{{tab.name}}", "id": "{{tab._tab_id}}" }'>{{ tab.name }}
+                            </option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" data-dismiss="modal"
+                        ng-click='append(user, bookmarkName, bookmarkUrl, bookmarkTab)'
+                        class="btn btn-primary">Append
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-container-795915" role="dialog" aria-labelledby="addTab" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="addTab">Add A Tab</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="tabName">Tab Name</label>
+                        <input type="text" ng-model="tabName" id="tabName" class="form-control">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" data-dismiss="modal"
+                        ng-click='addTab(user, tabName)'
+                        class="btn btn-primary">Add
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
